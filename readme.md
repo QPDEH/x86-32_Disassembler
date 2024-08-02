@@ -8,4 +8,4 @@ A lot of instructions still not implemented (fpu, extension, few others).
 ### Usage
 Extract `.text` or another `Executable` section from file with 7zip and place it to disassembler folder.
 
-run `python disasm.py`
+run `python disasm.py -i .text -o a.asm`

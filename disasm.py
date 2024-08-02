@@ -1,9 +1,15 @@
 #Program by QPDEH, see https://github.com/QPDEH
 #Sources - https://github.com/QPDEH/x86-32_Disassembler
 
+import argparse
 from defines import *
 
-with open(".text", "rb") as source:
+parser = argparse.ArgumentParser()
+parser.add_argument("-i", "--input-file", default=".text", dest="input_file")
+parser.add_argument("-o", "--output-file", default="a.asm", dest="output_file")
+argv = parser.parse_args()
+
+with open(argv.input_file, "rb") as source:
     data = source.read()
 index = 0
 length = len(data)
@@ -862,7 +868,7 @@ def read_command():
         out += " " + ", ".join(args)
     file.write(out + "\n")
 
-file = open("a.asm", "w+")
+file = open(argv.output_file, "w+")
 file.write("")
 plain_print = False
 while index < length:
