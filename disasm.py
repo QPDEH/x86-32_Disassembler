@@ -561,14 +561,18 @@ def read_command():
             args.append(regs_table[0])
             if not opcode // 8 % 2:
                 args.append(str(decode_immediate_data(1)))
+            else:
+                args.append("DX")
         #0xe6-0xe7,0xea-0xeb
         elif (opcode & 0b1111_0110) == 0b1110_0110:
             command = "OUT"
             w = opcode % 2
             regs_table = get_regs_table(has_0x66_prefix, w)
-            args.append(regs_table[0])
             if not opcode // 8 % 2:
                 args.append(str(decode_immediate_data(1)))
+            else:
+                args.append("DX")
+            args.append(regs_table[0])
         #0xe8
         elif opcode == 0b1110_1000:
             command = "CALL"
