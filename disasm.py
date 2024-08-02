@@ -330,6 +330,7 @@ def read_command():
             command = "XCHG"
             regs_table = get_regs_table(has_0x66_prefix, None)
             args.append(regs_table[opcode % 8])
+            args.append(regs_table[0])
         #0x98
         elif opcode == 0b1001_1000:
             command = "CBW"  # aka CWDE
