@@ -87,7 +87,7 @@ def decode_mrm_byte(has_0x66_prefix, regs_table):
                 else:
                     temp_args.append(regs32[base])
                 if index != 0b100:
-                    temp_args.append(str(2**scale * index))
+                    temp_args.append(f"{2**scale}*{regs32[index]}")
                 if mod or (base == 0b101 and not mod):
                     temp_args.append(str(disp))
                         
