@@ -317,12 +317,10 @@ def read_command():
             mrm_byte = get_byte()
             mod = get_mod(mrm_byte)
             mrm_args = get_mrm_args(mrm_byte)
+            index -=1
             regs_table = get_regs_table(has_0x66_prefix, None)
-            if mod == 0b11:
-                args.append(regs_table[1])
-            else:
-                pass
-                #TODO
+            temp = decode_mrm_byte(has_0x66, regs_table)
+            args.append(temp[1])
         #0x90
         elif opcode == 0b1001_0000:
             #Exchange eax with eax
@@ -852,7 +850,7 @@ def read_command():
     
     end_index = index
     out = ""
-    if False:
+    if True:
         out += "".join(list(map(lambda x: fill_to_2(hex(x)[2:]), data[start_index: end_index]))) + " "
     if has_lock_prefix:
         out += "LOCK "
