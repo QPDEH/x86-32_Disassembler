@@ -428,20 +428,16 @@ def read_command():
         elif opcode == 0b1100_0100:
             command = "LES"
             regs_table = get_regs_table(has_0x66_prefix, None)
-            mrm_byte = get_byte()
-            mod = get_mod(mrm_byte)
-            mrm_args = get_mrm_args(mrm_byte)
-            args.append(regs_table[mrm_args[0]])
-            args.append(str(mrm_args[1]))#TODO
+            mrm_args = decode_mrm_byte(has_0x66_prefix, regs_table)
+            args.append(temp[0])
+            args.append(temp[1])
         #0xc5
         elif opcode == 0b1100_0101:
             command = "LDS"
             regs_table = get_regs_table(has_0x66_prefix, None)
-            mrm_byte = get_byte()
-            mod = get_mod(mrm_byte)
-            mrm_args = get_mrm_args(mrm_byte)
-            args.append(regs_table[mrm_args[0]])
-            args.append(str(mrm_args[1]))#TODO
+            mrm_args = decode_mrm_byte(has_0x66_prefix, regs_table)
+            args.append(temp[0])
+            args.append(temp[1])
         #0xc6-0xc7
         elif (opcode & 0b1111_1110) == 0b1100_0110:
             command = "MOV"
